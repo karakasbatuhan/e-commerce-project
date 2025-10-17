@@ -10,15 +10,19 @@ import { ToastContainer, toast } from 'react-toastify'
 import Header from './components/Header.jsx'
 import HeroSlider from './components/HeroSlider.jsx'
 import Footer from './components/Footer.jsx'
+import CategoryPick from './components/CategoryPick.jsx'
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Header />
+    <main>
       <HeroSlider />
       <Provider store={store}>
         <App />
       </Provider>
+      <CategoryPick />
+    </main>
     <Footer />
   </StrictMode>,
 )
