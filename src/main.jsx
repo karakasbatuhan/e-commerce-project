@@ -11,6 +11,7 @@ import Header from './components/Header.jsx'
 import HeroSlider from './components/HeroSlider.jsx'
 import Footer from './components/Footer.jsx'
 import CategoryPick from './components/CategoryPick.jsx'
+import ProductCategoryList from './components/ProductCategoryList.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')).render(
         <App />
       </Provider>
       <CategoryPick />
+      <ProductCategoryList />
     </main>
     <Footer />
   </StrictMode>,

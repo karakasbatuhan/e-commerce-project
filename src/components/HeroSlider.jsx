@@ -2,7 +2,7 @@ import {BsChevronLeft, BsChevronRight} from "react-icons/bs"
 
 export default function HeroSlider() {
   return (
-    <section className="bg-[url(./assets/slider-bg.jpg)] w-full h-[44.8rem]  bg-no-repeat bg-cover font-montserrat flex flex-col justify-center items-center">
+    <div className="bg-[url(./assets/slider-bg.jpg)] w-full h-[44.8rem]  bg-no-repeat bg-cover font-montserrat flex flex-col justify-center items-center">
       <div className="w-full flex justify-between items-center flex-wrap  text-white mt-35">
         <BsChevronLeft size={60} className="btn-prev min-w-[60px] min-h-[60px] ml-5 cursor-pointer flex hover:scale-130 transition-all duration-300"/>
         <div className="flex flex-col justify-center gap-6 text-white max-w-[57.5rem] mr-[57.5rem] mt-17">
@@ -17,6 +17,6 @@ export default function HeroSlider() {
         <button className="w-15.5 h-2.5 bg-white cursor-pointer" aria-current="true"></button>
         <button className="w-15.5 h-2.5 bg-white opacity-60 cursor-pointer" aria-current="true"></button>        
       </div>
-    </section>
+    </div>
   );
 }
