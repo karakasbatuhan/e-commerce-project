@@ -8,13 +8,13 @@ export default  function ProductCategoryList() {
                 <h3 className="font-bold text-2xl text-[#252B42]">BESTSELLER PRODUCTS</h3>
                 <p className="font-medium text-sm text-[#737373]">Problems trying to resolve the conflict between </p>
             </div>
-            <div className="flex flew-row gap-10">
+            <div className="flex flew-row flex-wrap gap-10">
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
             </div>
-            <div className="flex flew-row gap-10">
+            <div className="flex flew-row flex-wrap gap-10">
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />

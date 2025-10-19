@@ -12,6 +12,7 @@ import HeroSlider from './components/HeroSlider.jsx'
 import Footer from './components/Footer.jsx'
 import CategoryPick from './components/CategoryPick.jsx'
 import ProductCategoryList from './components/ProductCategoryList.jsx'
+import Slider from './components/Slider.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
       </Provider>
       <CategoryPick />
       <ProductCategoryList />
+      <Slider />
     </main>
     <Footer />
   </StrictMode>,
