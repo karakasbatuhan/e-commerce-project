@@ -13,7 +13,7 @@ import { BsChevronDown } from 'react-icons/bs';
 
 export default function Header() {
   return (
-    <div className="font-montserrat">
+    <div className="font-montserrat overflow-hidden">
     <div className="bg-[#252B42] flex justify-between text-white p-3 w-full font-medium">
       <div className="ml-6 flex gap-10 text-sm">
         <h6 className="flex gap-2 items-center text-[12px]"><Phone size={15}/> (225) 555-0118</h6>

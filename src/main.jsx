@@ -13,6 +13,8 @@ import Footer from './components/Footer.jsx'
 import CategoryPick from './components/CategoryPick.jsx'
 import ProductCategoryList from './components/ProductCategoryList.jsx'
 import Slider from './components/Slider.jsx'
+import C2a from './components/C2a.jsx'
+import FeaturedPost from './components/FeaturedPost.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -26,6 +28,8 @@ createRoot(document.getElementById('root')).render(
       <CategoryPick />
       <ProductCategoryList />
       <Slider />
+      <C2a />
+      <FeaturedPost />
     </main>
     <Footer />
   </StrictMode>,

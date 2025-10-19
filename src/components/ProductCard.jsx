@@ -1,6 +1,6 @@
 export default function ProductCard() {
     return(
-        <div className="flex flex-col items-center font-montserrat gap-4">
+        <div className="flex flex-col items-center font-montserrat gap-4 overflow-hidden">
             <div className="bg-[url(./assets/productcard-1.jpg)] w-[15rem] h-[26.7rem]"></div>
             <div className="flex flex-col items-center gap-3">
                 <h5 className="font-bold text-base text-[#252B42]">Graphic Design</h5>

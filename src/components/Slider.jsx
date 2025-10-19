@@ -2,7 +2,7 @@ import {BsChevronLeft, BsChevronRight} from "react-icons/bs"
 
 export default function Slider() {
     return(
-        <div className="bg-[#23856D] w-full h-[44.5rem] flex flex-row justify-around items-center gap-70 font-montserrat">
+        <div className="bg-[#23856D] w-full h-[44.5rem] flex flex-row justify-around items-center gap-70 font-montserrat overflow-hidden">
             <BsChevronLeft size={60} className="btn-prev min-w-[60px] min-h-[60px] text-white ml-5 cursor-pointer flex hover:scale-130 transition-all duration-300"/>
             <div className="flex flex-row items-center gap-5">
                 <div className="flex flex-col w-[31.8rem] h-[27rem] text-white  justify-around">
