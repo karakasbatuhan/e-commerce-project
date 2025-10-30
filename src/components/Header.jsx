@@ -14,7 +14,7 @@ import { BsChevronDown } from 'react-icons/bs';
 export default function Header() {
   return (
     <div className="font-montserrat overflow-hidden">
-    <div className="bg-[#252B42] flex justify-between text-white p-3 w-full font-medium">
+    <div className="bg-[#252B42] flex justify-between flex-wrap text-white p-3 w-full font-medium max-lg:hidden">
       <div className="ml-6 flex gap-10 text-sm">
         <h6 className="flex gap-2 items-center text-[12px]"><Phone size={15}/> (225) 555-0118</h6>
         <a href="" className="flex gap-2 items-center text-[12px]"><Mail size={15}/> michelle.rivera@example.com</a>
@@ -28,10 +28,10 @@ export default function Header() {
         <a href=""><Twitter  size={18}/></a>
       </div>
     </div>
-    <div className="flex p-4"> 
+    <div className="flex p-4 max-lg:flex-row max-lg:justify-center"> 
       <h3 className="text-2xl font-bold ml-5">Bandage</h3>
-      <div className="flex w-full overflow-hidden justify-between items-center ml-18">
-        <nav>
+      <div className="flex w-full overflow-hidden justify-between items-center ml-10 max-lg:justify-end max-lg:mt-1 max-lg:ml-2">
+        <nav className="max-md:hidden">
           <ul className="flex ml-10">
             <li className="mr-4"><a href="" className="font-bold text-[#737373] hover:text-black text-sm transition-all duration-300">Home</a></li>
             <div className="group">
@@ -54,21 +54,32 @@ export default function Header() {
                   <a href="" className="font-bold text-gray-500 mt-5 hover:text-black text-sm transition-all duration-300">Hats</a>
                 </div>
               </div>
-            </div>
+            </div>            
             <li className="mr-4"><a href="" className="font-bold text-[#737373]  hover:text-black text-sm transition-all duration-300">About</a></li>
             <li className="mr-4"><a href="" className="font-bold text-[#737373]  hover:text-black text-sm transition-all duration-300">Blog</a></li>
             <li className="mr-4"><a href="" className="font-bold text-[#737373]  hover:text-black text-sm transition-all duration-300">Contact</a></li>
             <li className="mr-4"><a href="" className="font-bold text-[#737373]  hover:text-black text-sm transition-all duration-300">Pages</a></li>
           </ul>
-        </nav>
-        <div className="flex text-[#23A6F0] mr-8">
-          <a href="" className="mr-6 flex items-center gap-1 font-bold text-sm"><User size={18} className="mb-1"/> Login / Register</a>
+        </nav>       
+        <div className="flex text-[#23A6F0] mr-8 max-lg:text-[#3C403D]">
+          <a href="" className="mr-6 flex items-center gap-1 font-bold text-sm hover:scale-105 transition-all duration-300 max-lg:hidden"><User size={18} className="mb-1"/> Login / Register</a>
+          <a href="" className="mr-6 flex items-center gap-1 font-bold text-sm hover:scale-120 transition-all duration-300 lg:hidden"><User size={18} className="mb-1"/></a>
           <a href="" className="mr-6 flex items-center hover:scale-120 transition-all duration-300"><Search size={18}/></a>
           <a href="" className="mr-6 flex items-center hover:scale-120 transition-all duration-300"><ShoppingCart size={18}/></a>
           <a href="" className="mr-5 flex items-center hover:scale-120 transition-all duration-300"><Heart size={18}/></a>
         </div>
       </div>
     </div>
+     <div className="lg:hidden">
+          <nav className="md:hidden flex flex-row justify-center">
+              <ul className="text-[#737373] font-bold text-2xl flex flex-col my-15 justify-center items-center gap-9">
+                <li className="hover:font-medium transition-all duration-300">Home</li>
+                <li className="hover:font-medium transition-all duration-300">Product</li>
+                <li className="hover:font-medium transition-all duration-300">Pricing</li>
+                <li className="hover:font-medium transition-all duration-300">Contact</li>
+              </ul>
+            </nav>
+        </div>
     </div>
   )
 }
