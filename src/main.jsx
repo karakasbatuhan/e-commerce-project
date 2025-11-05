@@ -4,11 +4,8 @@ import './index.css'
 import App from './App.jsx'
 import { Provider } from 'react-redux'
 import { store } from './store/store.js'
-import { BrowserRouter } from 'react-router'
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify'
-import Header from './components/Header.jsx'
-import Footer from './components/Footer.jsx'
+import Header from './layouts/Header.jsx'
+import Footer from './layouts/Footer.jsx'
 
 
 
