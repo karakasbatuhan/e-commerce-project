@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import { Instagram } from "lucide-react";
 import { Youtube } from "lucide-react";
 import { Facebook } from "lucide-react";
@@ -10,6 +9,7 @@ import { Search } from "lucide-react";
 import { ShoppingCart } from "lucide-react";
 import { Heart } from "lucide-react";
 import { BsChevronDown } from 'react-icons/bs';
+import { NavLink, Link } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -33,9 +33,9 @@ export default function Header() {
       <div className="flex w-full overflow-hidden justify-between items-center ml-10 max-lg:justify-end max-lg:mt-1 max-lg:ml-2">
         <nav className="max-md:hidden">
           <ul className="flex ml-10">
-            <li className="mr-4"><a href="" className="font-bold text-[#737373] hover:text-black text-sm transition-all duration-300">Home</a></li>
+            <li className="mr-4"><Link to="/" className="font-bold text-[#737373] hover:text-black text-sm transition-all duration-300">Home</Link></li>
             <div className="group">
-              <li className="mr-4"><a href="" className="font-bold text-[#737373] hover:text-black text-sm transition-all duration-300 justify-between items-center">Shop <BsChevronDown size={12} className="inline-block ml-1" /></a></li>
+              <li className="mr-4"><Link to="/shop" className="font-bold text-[#737373] hover:text-black text-sm transition-all duration-300 justify-between items-center">Shop <BsChevronDown size={12} className="inline-block ml-1" /></Link></li>
               <div className="scale-y-0 group-hover:scale-y-100 origin-top duration-300 absolute transition-all bg-white text-black p-4 flex flex-row gap-29">
                 <div className="flex flex-col">
                   <a href="" className="mb-10 font-bold text-sm">Kadın</a>
