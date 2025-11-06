@@ -73,10 +73,10 @@ export default function Header() {
      <div className="lg:hidden">
           <nav className="md:hidden flex flex-row justify-center">
               <ul className="text-[#737373] font-bold text-2xl flex flex-col my-15 justify-center items-center gap-9">
-                <li className="hover:font-medium transition-all duration-300">Home</li>
-                <li className="hover:font-medium transition-all duration-300">Product</li>
-                <li className="hover:font-medium transition-all duration-300">Pricing</li>
-                <li className="hover:font-medium transition-all duration-300">Contact</li>
+                <Link to="/" className="hover:font-medium transition-all duration-300">Home</Link>
+                <Link to="/product" className="hover:font-medium transition-all duration-300">Product</Link>
+                <Link to="/pricing" className="hover:font-medium transition-all duration-300">Pricing</Link>
+                <Link to="/contact" className="hover:font-medium transition-all duration-300">Contact</Link>
               </ul>
             </nav>
         </div>
