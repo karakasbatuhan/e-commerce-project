@@ -3,7 +3,7 @@ import { Facebook } from "lucide-react";
 import { Instagram } from "lucide-react";
 import { Twitter } from "lucide-react";
 
-export default function Footer() {
+export default function Footer(bg) {
     return (
         <footer className="overflow-hidden font-montserrat">
             <div className="w-full h-[142px] bg-[#FAFAFA] flex flex-col justify-around items-center font-montserrat pt-14 gap-10.5 max-xl:h-[173px] max-xl:pt-0 max-xl:items-start max-xl:pl-10">

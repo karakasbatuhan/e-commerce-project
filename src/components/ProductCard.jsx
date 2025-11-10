@@ -1,9 +1,11 @@
+import { NavLink, Link } from "react-router-dom";
+
 export default function ProductCard() {
     return(
-        <div className="flex flex-col items-center font-montserrat gap-4 overflow-hidden">
-            <div className="bg-[url(./assets/productcard-1.jpg)] w-[15rem] h-[26.7rem]"></div>
+         <div className="flex flex-col items-center font-montserrat gap-4 overflow-hidden">
+            <div className="bg-[url(./assets/productcard-1.jpg)] w-[15rem] h-[26.7rem] cursor-pointer"></div>
             <div className="flex flex-col items-center gap-3">
-                <h5 className="font-bold text-base text-[#252B42]">Graphic Design</h5>
+                <h5 className="font-bold text-base text-[#252B42] cursor-pointer"><Link to="/product-detail">Graphic Design</Link></h5>
                 <a href="" className="font-bold text-sm text-[#737373]">English Department</a>
                 <div className="flex flex-row gap-3">
                     <span className="font-bold text-base text-[#BDBDBD]">$16.48</span>

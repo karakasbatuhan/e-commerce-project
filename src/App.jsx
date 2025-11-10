@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Home from './pages/Home.jsx'
 import Shop from './pages/Shop.jsx'
+import ProductDetail from './pages/ProductDetail.jsx'
 import Header from './layouts/Header.jsx'
 import Footer from './layouts/Footer.jsx'
 import {Switch, Route } from 'react-router-dom';
@@ -20,6 +21,9 @@ export default function App() {
           </Route>
           <Route path="/shop">
             <Shop />
+          </Route>
+          <Route path="/product-detail">
+            <ProductDetail />
           </Route>
         </Switch>    
           

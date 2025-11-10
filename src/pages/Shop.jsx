@@ -2,6 +2,7 @@ import {BsChevronLeft, BsChevronRight, BsChevronDown} from "react-icons/bs"
 import { LayoutGrid } from "lucide-react"   
 import { ListChecks } from "lucide-react"
 import ProductCardShop from "../components/ProductCardShop.jsx"
+import { Link } from "react-router-dom";
 
 export default function Shop() {
     return (
@@ -10,7 +11,7 @@ export default function Shop() {
                     <div className="flex flex-row h-[92px] justify-around items-center max-lg:h-[202px] max-lg:flex-col max-lg:justify-center max-lg:gap-15">
                         <h3 className="font-bold text-2xl">Shop</h3>
                         <div className="flex flex-row items-center gap-2">
-                            <a href="" className="font-bold">Home</a>
+                            <Link to="/" className="font-bold">Home</Link>
                             <BsChevronRight size={20} className="text-[#BDBDBD]"/>
                             <h6 className="font-bold text-[#BDBDBD]">Shop</h6>
                         </div>
