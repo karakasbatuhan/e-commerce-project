@@ -2,6 +2,7 @@
 import { Facebook } from "lucide-react";
 import { Instagram } from "lucide-react";
 import { Twitter } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Footer(bg) {
     return (
@@ -20,14 +21,14 @@ export default function Footer(bg) {
             <div className="w-full h-[272px] flex flex-row justify-center items-start mt-15 gap-18 font-montserrat max-xl:h-[1071px] max-xl:flex-col max-xl:gap-10 max-xl:mb-5 max-xl:ml-10">
                 <div className="flex flex-col gap-5">
                     <h5 className="font-bold">Company Info</h5>
-                    <a href="" className="font-bold text-sm text-[#737373] hover:scale-105 transition-all duration-250">About Us</a>
+                    <Link to="/about-us" className="font-bold text-sm text-[#737373] hover:scale-105 transition-all duration-250">About Us</Link>
                     <a href="" className="font-bold text-sm text-[#737373] hover:scale-105 transition-all duration-250">Career</a>
                     <a href="" className="font-bold text-sm text-[#737373] hover:scale-105 transition-all duration-250">We are hiring</a>
                     <a href="" className="font-bold text-sm text-[#737373] hover:scale-105 transition-all duration-250">Blog</a>
                 </div>
                 <div className="flex flex-col gap-5">
                     <h5 className="font-bold">Legal</h5>
-                    <a href="" className="font-bold text-sm text-[#737373] hover:scale-105 transition-all duration-250">About Us</a>
+                    <Link to="/about-us" className="font-bold text-sm text-[#737373] hover:scale-105 transition-all duration-250">About Us</Link>
                     <a href="" className="font-bold text-sm text-[#737373] hover:scale-105 transition-all duration-250">Career</a>
                     <a href="" className="font-bold text-sm text-[#737373] hover:scale-105 transition-all duration-250">We are hiring</a>
                     <a href="" className="font-bold text-sm text-[#737373] hover:scale-105 transition-all duration-250">Blog</a>

@@ -3,6 +3,7 @@ import './App.css'
 import Home from './pages/Home.jsx'
 import Shop from './pages/Shop.jsx'
 import ProductDetail from './pages/ProductDetail.jsx'
+import AboutUs from './pages/AboutUs.jsx'
 import ScrollToTop from './components/ScrollToTop.jsx'
 import Header from './layouts/Header.jsx'
 import Footer from './layouts/Footer.jsx'
@@ -25,6 +26,9 @@ export default function App() {
           </Route>
           <Route path="/product-detail">
             <ProductDetail />
+          </Route>
+          <Route path="/about-us">
+            <AboutUs />
           </Route>
         </Switch>  
       <Footer />

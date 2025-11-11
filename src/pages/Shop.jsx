@@ -3,6 +3,7 @@ import { LayoutGrid } from "lucide-react"
 import { ListChecks } from "lucide-react"
 import ProductCardShop from "../components/ProductCardShop.jsx"
 import { Link } from "react-router-dom";
+import { FaPlay } from "react-icons/fa";
 
 export default function Shop() {
     return (
