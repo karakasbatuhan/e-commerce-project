@@ -55,7 +55,7 @@ export default function Header() {
                   </div>
                 </div>
               </div>            
-              <li className="mr-4"><a href="" className="font-bold text-[#737373]  hover:text-black text-sm transition-all duration-300">About</a></li>
+              <li className="mr-4"><Link to="/about-us" className="font-bold text-[#737373]  hover:text-black text-sm transition-all duration-300">About</Link></li>
               <li className="mr-4"><a href="" className="font-bold text-[#737373]  hover:text-black text-sm transition-all duration-300">Blog</a></li>
               <li className="mr-4"><a href="" className="font-bold text-[#737373]  hover:text-black text-sm transition-all duration-300">Contact</a></li>
               <li className="mr-4"><a href="" className="font-bold text-[#737373]  hover:text-black text-sm transition-all duration-300">Pages</a></li>
