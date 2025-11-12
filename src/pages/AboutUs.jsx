@@ -4,24 +4,24 @@ import AboutUsCard from "../components/AboutUsCard.jsx";
 export default function AboutUs() {
     return (
         <div className="flex flex-col font-montserrat">
-            <div className="flex flex-row justify-center gap-75 h-[740px] max-[1440px]:flex-col max-[1440px]:h-[1060px] max-[1440px]:gap-40 max-[1440px]:items-center max-[1440px]:mt-40">
-                <div className="flex flex-col gap-5 justify-center max-[1440px]:items-center">
-                    <h5 className="font-bold text-[16px] text-[#252B42] max-[1440px]:hidden">ABOUT COMPANY</h5>
-                    <h1 className="font-bold text-[58px] text-[#252B42] max-[1440px]:text-[40px]">ABOUT US</h1>
-                    <h4 className="font-medium text-[20px] text-[#737373] w-[376px] leading-[30px] max-[1440px]:w-[277px] max-[1440px]:text-center">We know how large objects will act, but things on a small scale <span className="hidden max-[1440px]:inline">just do not act that way.</span></h4>
+            <div className="flex flex-row justify-center h-[740px] max-[1100px]:flex-col max-[1100px]:h-[1060px] max-[1100px]:gap-40 max-[1100px]:items-center max-[1100px]:mt-40">
+                <div className="flex flex-col gap-5 justify-center items-center max-[1330px]:items-center w-[50%]  max-[1300px]:w-[30%] max-[1100px]:w-[100%]">
+                    <h5 className="font-bold text-[16px] text-[#252B42] max-[1330px]:hidden">ABOUT COMPANY</h5>
+                    <h1 className="font-bold text-[58px] text-[#252B42] max-[1330px]:text-[40px]">ABOUT US</h1>
+                    <h4 className="font-medium text-[20px] text-[#737373] w-[376px] leading-[30px] max-[1330px]:w-[277px] max-[1330px]:text-center">We know how large objects will act, but things on a small scale <span className="hidden max-[1330px]:inline">just do not act that way.</span></h4>
                     <button className="w-[193px] h-[52px] bg-[#23A6F0] text-white font-semibold text-[14px] rounded-lg">Get Quote Now</button>
                 </div>
-                <div>
-                    <div className="w-[632px] h-[612px] flex flex-row max-[1440px]:justify-center">
-                        <div className="bg-[url('/src/assets/aboutus-1.png')] bg-cover bg-center w-[571px] h-[668px] absolute max-[1440px]:w-[375.73px] max-[1440px]:h-[439.19px]"></div>
-                        <div className="flex flex-col items-center gap-80 mt-10 max-[1440px]:gap-60">
-                            <div className="w-[77.39px] h-[77.39px] rounded-[50%] bg-[#FFE9EA] max-[1440px]:w-[47.27px] max-[1440px]:h-[47.27px]"></div>
-                            <div className="w-[14.78px] h-[14.78px] rounded-[50%] bg-[#977DF4] max-[1440px]:w-[9.02px] max-[1440px]:h-[9.02px]"></div>
+                <div className="w-[50%]  max-[1300px]:w-[70%] max-[1100px]:w-[100%]">
+                    <div className="h-[612px] flex flex-row max-[1300px]:justify-center max-[1100px]:w-[100%]">
+                        <div className="bg-[url('/src/assets/aboutus-1.png')] bg-cover bg-center w-[571px] h-[668px] absolute max-[1100px]:w-[375.73px] max-[1100px]:h-[439.19px]"></div>
+                        <div className="flex flex-col items-center gap-80 mt-10 max-[1100px]:gap-60">
+                            <div className="w-[77.39px] h-[77.39px] rounded-[50%] bg-[#FFE9EA] max-[1100px]:w-[47.27px] max-[1100px]:h-[47.27px]"></div>
+                            <div className="w-[14.78px] h-[14.78px] rounded-[50%] bg-[#977DF4] max-[1100px]:w-[9.02px] max-[1100px]:h-[9.02px]"></div>
                         </div>
-                        <div className="w-[484.06px] h-[484.06px] rounded-[50%] bg-[#FFE9EA] mt-10 max-[1440px]:w-[295.65px] max-[1440px]:h-[295.65px]"></div>
-                        <div className="flex flex-col w-[50px] items-center mt-45 ml-5 gap-25 max-[1440px]:mt-30 max-[1440px]:gap-15">
-                            <div className="w-[14.78px] h-[14.78px] rounded-[50%] bg-[#977DF4] ml-5 max-[1440px]:w-[9.02px] max-[1440px]:h-[9.02px]"></div>
-                            <div className="w-[30.25px] h-[30.25px] rounded-[50%] bg-[#FFE9EA] mr-5 max-[1440px]:w-[18.48px] max-[1440px]:h-[18.48px]"></div>
+                        <div className="w-[484.06px] h-[484.06px] rounded-[50%] bg-[#FFE9EA] mt-10 max-[1100px]:w-[295.65px] max-[1100px]:h-[295.65px]"></div>
+                        <div className="flex flex-col w-[50px] items-center mt-45 ml-5 gap-25 max-[1100px]:mt-30 max-[1100px]:gap-15">
+                            <div className="w-[14.78px] h-[14.78px] rounded-[50%] bg-[#977DF4] ml-5 max-[1100px]:w-[9.02px] max-[1100px]:h-[9.02px]"></div>
+                            <div className="w-[30.25px] h-[30.25px] rounded-[50%] bg-[#FFE9EA] mr-5 max-[1100px]:w-[18.48px] max-[1100px]:h-[18.48px]"></div>
                         </div>
                     </div>                    
                 </div>
@@ -61,7 +61,7 @@ export default function AboutUs() {
             <div className="flex flex-col h-[806px] items-center mt-30 gap-30 max-[1100px]:h-[1627px] max-[1100px]:mt-10">
                 <div className="flex flex-col items-center gap-5">
                     <h2 className="font-bold text-[40px] text-[#252B42]">Meet Our Team</h2>
-                    <p className="font-semibold text-[14px] text-[#737373] w-[469px] text-center">Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics </p>
+                    <p className="font-semibold text-[14px] text-[#737373] w-[469px] text-center max-[470px]:w-[302px]">Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics </p>
                 </div>
                 <div className="flex flex-row gap-12 max-[1100px]:flex-col ">
                     <AboutUsCard />
