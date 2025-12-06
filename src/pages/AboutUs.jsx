@@ -4,11 +4,11 @@ import AboutUsCard from "../components/AboutUsCard.jsx";
 export default function AboutUs() {
     return (
         <div className="flex flex-col font-montserrat">
-            <div className="flex flex-row justify-center h-[740px] max-[1100px]:flex-col max-[1100px]:h-[1060px] max-[1100px]:gap-40 max-[1100px]:items-center max-[1100px]:mt-40">
-                <div className="flex flex-col gap-5 justify-center items-center max-[1330px]:items-center w-[50%]  max-[1300px]:w-[30%] max-[1100px]:w-[100%]">
-                    <h5 className="font-bold text-[16px] text-[#252B42] max-[1330px]:hidden">ABOUT COMPANY</h5>
-                    <h1 className="font-bold text-[58px] text-[#252B42] max-[1330px]:text-[40px]">ABOUT US</h1>
-                    <h4 className="font-medium text-[20px] text-[#737373] w-[376px] leading-[30px] max-[1330px]:w-[277px] max-[1330px]:text-center">We know how large objects will act, but things on a small scale <span className="hidden max-[1330px]:inline">just do not act that way.</span></h4>
+            <div className="flex flex-row justify-center h-[740px] max-[1300px]:flex-col max-[1300px]:h-[1460px] max-[1100px]:h-[1060px] max-[1300px]:gap-40 max-[1300px]:items-center max-[1300px]:mt-20">
+                <div className="flex flex-col gap-5 justify-center pl-[15%] max-[1300px]:items-center w-[50%]  max-[1300px]:w-[30%] max-[1100px]:w-[100%] max-[1300px]:pl-0">
+                    <h5 className="font-bold text-[16px] text-[#252B42] max-[1300px]:hidden">ABOUT COMPANY</h5>
+                    <h1 className="font-bold text-[58px] text-[#252B42] max-[1100px]:text-[40px]">ABOUT US</h1>
+                    <h4 className="font-medium text-[20px] text-[#737373] w-[376px] leading-[30px] max-[1300px]:w-[277px] max-[1300px]:text-center">We know how large objects will act, but things on a small scale <span className="hidden max-[1300px]:inline">just do not act that way.</span></h4>
                     <button className="w-[193px] h-[52px] bg-[#23A6F0] text-white font-semibold text-[14px] rounded-lg">Get Quote Now</button>
                 </div>
                 <div className="w-[50%]  max-[1300px]:w-[70%] max-[1100px]:w-[100%]">
@@ -16,7 +16,7 @@ export default function AboutUs() {
                         <div className="bg-[url('/src/assets/aboutus-1.png')] bg-cover bg-center w-[571px] h-[668px] absolute max-[1100px]:w-[375.73px] max-[1100px]:h-[439.19px]"></div>
                         <div className="flex flex-col items-center gap-80 mt-10 max-[1100px]:gap-60">
                             <div className="w-[77.39px] h-[77.39px] rounded-[50%] bg-[#FFE9EA] max-[1100px]:w-[47.27px] max-[1100px]:h-[47.27px]"></div>
-                            <div className="w-[14.78px] h-[14.78px] rounded-[50%] bg-[#977DF4] max-[1100px]:w-[9.02px] max-[1100px]:h-[9.02px]"></div>
+                            <div className="w-[14.78px] h-[14.78px] rounded-[50%] bg-[#7dbef4] max-[1100px]:w-[9.02px] max-[1100px]:h-[9.02px]"></div>
                         </div>
                         <div className="w-[484.06px] h-[484.06px] rounded-[50%] bg-[#FFE9EA] mt-10 max-[1100px]:w-[295.65px] max-[1100px]:h-[295.65px]"></div>
                         <div className="flex flex-col w-[50px] items-center mt-45 ml-5 gap-25 max-[1100px]:mt-30 max-[1100px]:gap-15">
