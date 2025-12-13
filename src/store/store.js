@@ -1,4 +1,6 @@
-import { legacy_createStore } from "redux";
-import { settingsReducer } from "./reducers/settingsReducer";
+import { legacy_createStore as createStore, applyMiddleware } from "redux";
+import {thunk} from "redux-thunk";
+import { reducers } from "./reducers";
+import {logger} from "redux-logger";
 
-export const store = legacy_createStore(settingsReducer);
+export const store = createStore(reducers, applyMiddleware(thunk, logger));

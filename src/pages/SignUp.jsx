@@ -3,33 +3,41 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { BiHide } from "react-icons/bi";
 import { BiShow } from "react-icons/bi";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRoles } from "../store/actions/globalActions.js";
 
 export default function SignUpForm() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
-  const [roles, setRoles] = useState([]); 
-  const [selectedRoleId, setSelectedRoleId] = useState('3'); 
 
-  const { register, handleSubmit, reset, watch, formState: { errors, isValid, isSubmitting } } = useForm({
+  const dispatch = useDispatch();
+    const roles = useSelector((state) => state.client.roles);
+
+    useEffect(() => {
+      dispatch(fetchRoles());
+    }, []);    
+
+  const { register, handleSubmit, reset, watch, setValue, formState: { errors, isValid, isSubmitting } } = useForm({
       mode: 'onChange',
-    
       defaultValues: {
         role_id: '3',
       }}); 
 
-  function handleRoleChange(event) {
-    setSelectedRoleId(event.target.value);
-    console.log("Seçilen Rol ID'si:", event.target.value);
-    const newValue= event.target.value;
-    const rol = roles.find(role => role.id === parseInt(newValue));
-    if(rol){
-      console.log("Seçilen Rol Kodu:", rol.code);
+  useEffect(() => {
+    if(roles && roles.length > 0) {
+      const customerRole = roles.find(role => role.code === 'customer');
+      if(customerRole) {
+        setValue('role_id', customerRole.id.toString());
+      }
     }
-  }
+  }, [roles, setValue]);
+
+  const currentRoleId = watch("role_id"); 
 
   const capitalizeFirstLetter = (string) => {
     if (!string || typeof string !== 'string' || string.length === 0) {
+      return "";
     }
 
     const firstLetter = string.charAt(0).toUpperCase();
@@ -37,26 +45,6 @@ export default function SignUpForm() {
 
     return firstLetter + restOfString;
 };
-
-  useEffect(() => {
-    axios.get("https://workintech-fe-ecommerce.onrender.com/roles") 
-      .then((response) => {
-        const data = response.data;
-        console.log("API'dan Gelen Tüm Veri:", data);
-        
-        if (Array.isArray(data) && data.length > 0) {
-          setRoles(data);
-          const customerRole = data.find(role => role.code === 'customer');
-          console.log("Seçilen Rol:",customerRole);
-          if (customerRole) {
-            setSelectedRoleId(customerRole.id);
-          }
-        }
-      })
-      .catch((error) => {
-        console.error("Roller çekilirken hata oluştu:", error);
-      })
-  }, []); 
 
   const submitFn = async (formData) => {    
     console.log("Base Data:", formData); 
@@ -86,7 +74,7 @@ export default function SignUpForm() {
 
   return (
     <div className={`flex w-[100%] h-[1069px] justify-center items-center bg-gray-200 font-montserrat`}>
-      <div className={`flex w-[400px] h-[${selectedRoleId === '2' ? '930px' : '600px'}] rounded-2xl justify-center items-start pt-10 bg-white shadow-xl/40`}>
+      <div className={`flex w-[400px] h-[${currentRoleId === '2' ? '930px' : '600px'}] rounded-2xl justify-center items-start pt-10 bg-white shadow-xl/40`}>
         <form className="flex flex-col justify-center items-center gap-5" onSubmit={handleSubmit(submitFn)}>
           <h3 className="font-bold text-[25px]">SIGN UP</h3>
           <div className="flex flex-col gap-2 justify-center items-center">            
@@ -146,15 +134,15 @@ export default function SignUpForm() {
               </div>
               {errors.confirmPassword && <p className="text-red-500">{errors.confirmPassword.message}</p>}
               <label htmlFor="role" className="font-semibold text-[18px]">Role</label>
-              <select name="role_id" className="border-2 border-black rounded-md p-2" {...register("role_id")} onChange={handleRoleChange} value={selectedRoleId}>     
-                  {roles.map((roleData) => (
+              <select name="role_id" className="border-2 border-black rounded-md p-2" {...register("role_id")} /*onChange={handleRoleChange} value={selectedRoleId}*/>     
+                  {roles?.map((roleData) => (
                   <option key={roleData.id} value={roleData.id}>
                       {capitalizeFirstLetter(roleData.code)}                       
                   </option>
                   ))}            
               </select>
             </div>
-            {selectedRoleId === '2' && (
+            {currentRoleId === '2' && (
                 <div className={"flex flex-col gap-1.5"}>
                   <label htmlFor="store-name" className="font-semibold text-[18px]">Store Name</label>
                   <input type="text" id="store-name"                        
