@@ -9,9 +9,32 @@ import { Search } from "lucide-react";
 import { ShoppingCart } from "lucide-react";
 import { Heart } from "lucide-react";
 import { BsChevronDown } from 'react-icons/bs';
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useSelector, useDispatch } from "react-redux";
+import { LogOut } from "lucide-react";
+import { setUser } from "../store/actions/clientActions";
+import { toast } from "react-toastify";
+import md5 from "md5";
 
 export default function Header() {
+
+const userInfo = useSelector((state) => state.client.user);
+const dispatch = useDispatch();
+
+const handleLogout = () => {
+    console.log("Logout is working");
+    dispatch(setUser({}));
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
+    delete axios.defaults.headers.common['Authorization'];   
+    toast.success("Logout successful!"); 
+};
+
+const gravatarUrl = userInfo.email
+  ? `https://www.gravatar.com/avatar/${md5(userInfo.email.trim().toLowerCase())}?s=200&d=identicon`
+  : "";
+
   return (
     <div className="font-montserrat overflow-hidden">
       <div className="bg-[#252B42] flex justify-between flex-wrap text-white p-3 w-full font-medium max-lg:hidden">
@@ -19,7 +42,7 @@ export default function Header() {
           <h6 className="flex gap-2 items-center text-[12px]"><Phone size={15}/> (225) 555-0118</h6>
           <a href="" className="flex gap-2 items-center text-[12px]"><Mail size={15}/> michelle.rivera@example.com</a>
         </div>
-        <h6 className="text-sm">Follow Us  and get a chance to win 80% off</h6>
+        <h6 className="text-sm">Follow Us and get a chance to win 80% off</h6>
         <div className="flex gap-3.5 mr-10 text-sm">
           <h6 className="text-[12px]">Follow Us : </h6>
           <a href=""><Instagram size={18}/></a>
@@ -62,7 +85,22 @@ export default function Header() {
             </ul>
           </nav>       
           <div className="flex text-[#23A6F0] mr-8 max-lg:text-[#3C403D]">
-            <a href="" className="mr-6 flex items-center gap-1 font-bold text-sm hover:scale-105 transition-all duration-300 max-lg:hidden"><User size={18} className="mb-1"/> Login / Register</a>
+            <div className="mr-3 flex items-center gap-1 font-bold text-sm hover:scale-105 hover:transition-all duration-300">
+              {userInfo.name ? (
+                <div className="flex flex-row gap-2 items-center">
+                  <img src={gravatarUrl} alt="Gravatar" className="w-6 h-6 rounded-full"/>
+                  <span>{userInfo.name}</span>
+                  <LogOut size={18} className="cursor-pointer hover:text-red-600" onClick={handleLogout} title="Logout"/>
+                </div>
+              ) 
+              : 
+              (
+                <div className="mr-3 flex items-center gap-1 font-bold text-sm hover:scale-105 transition-all duration-300 max-lg:hidden"><User size={18} className="mb-1"/>
+                  <Link to={{ pathname: "/login", state: { referrer: location.pathname } }}> Login / Register</Link>
+                </div>
+              )}          
+
+            </div>
             <a href="" className="mr-6 flex items-center gap-1 font-bold text-sm hover:scale-120 transition-all duration-300 lg:hidden"><User size={18} className="mb-1"/></a>
             <a href="" className="mr-6 flex items-center hover:scale-120 transition-all duration-300"><Search size={18}/></a>
             <a href="" className="mr-6 flex items-center hover:scale-120 transition-all duration-300"><ShoppingCart size={18}/></a>

@@ -1,80 +1,57 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { BiHide } from "react-icons/bi";
 import { BiShow } from "react-icons/bi";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRoles } from "../store/actions/globalActions.js";
+import { signUser } from "../store/actions/globalActions.js";
 
 export default function SignUpForm() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
 
-  const dispatch = useDispatch();
-    const roles = useSelector((state) => state.client.roles);
+  const dispatch = useDispatch(); // redux dispatch fonksiyonunu aldık
+  const roles = useSelector((state) => state.client.roles); // redux store'dan rolleri aldık
 
     useEffect(() => {
       dispatch(fetchRoles());
-    }, []);    
+    }, []); //sayfa ilk render olduğunda rolleri çektik
+
+    useEffect(() => {
+      if(roles && roles.length > 0) {
+        const customerRole = roles.find(role => role.code === 'customer');
+        if(customerRole) {
+          setValue('role_id', customerRole.id.toString());
+        }
+      }
+    }, [roles]); // roles yüklendiğinde varsayılan rolü customer olarak ayarladık
 
   const { register, handleSubmit, reset, watch, setValue, formState: { errors, isValid, isSubmitting } } = useForm({
-      mode: 'onChange',
-      defaultValues: {
-        role_id: '3',
-      }}); 
+      mode: 'onChange'      
+    }); 
 
-  useEffect(() => {
-    if(roles && roles.length > 0) {
-      const customerRole = roles.find(role => role.code === 'customer');
-      if(customerRole) {
-        setValue('role_id', customerRole.id.toString());
-      }
-    }
-  }, [roles, setValue]);
+  const currentRoleId = watch("role_id"); // seçilen rolü izliyoruz çünkü formun dinamik alanlarını buna göre göstereceğiz
 
-  const currentRoleId = watch("role_id"); 
-
+  // Roller küçük harflerle gelebilir, ilk harfi büyük yapıyoruz
   const capitalizeFirstLetter = (string) => {
     if (!string || typeof string !== 'string' || string.length === 0) {
       return "";
     }
-
     const firstLetter = string.charAt(0).toUpperCase();
     const restOfString = string.slice(1).toLowerCase();
-
     return firstLetter + restOfString;
 };
 
-  const submitFn = async (formData) => {    
-    console.log("Base Data:", formData); 
-    const formDataCopy = { ...formData };
-    delete formDataCopy.confirmPassword;
-    if(formDataCopy.role_id !== '2' ){
-      delete formDataCopy.store;
-    }
-    console.log("Data to be sent:", formDataCopy);
-
-    try {
-      const url = "https://workintech-fe-ecommerce.onrender.com/signup";
-      const response = await axios.post(url, formDataCopy);
-      console.log("Successful Response:", response.data);
-      alert("You need to click link in email to activate your account!");
-    }
-
-    catch (error) {
-      console.error("Error Responsse:", error.response);
-      if(error.response){
-        console.log("Error Response Data:", error.response.data);
-        alert(`Error: ${error.response.data.message}`);
-      }
+// Form submit fonksiyonu
+function submitFn(formData) {    
+      dispatch(signUser(formData));
       reset();
-    }
   };
+  
 
   return (
-    <div className={`flex w-[100%] h-[1069px] justify-center items-center bg-gray-200 font-montserrat`}>
-      <div className={`flex w-[400px] h-[${currentRoleId === '2' ? '930px' : '600px'}] rounded-2xl justify-center items-start pt-10 bg-white shadow-xl/40`}>
+    <div className="flex w-[100%] h-[1000px] justify-center items-center bg-gray-200 font-montserrat">
+      <div className={`flex w-[400px] h-[${currentRoleId === '2' ? '930px' : '640px'}] rounded-2xl justify-center items-start pt-10 bg-white shadow-xl/40`}>
         <form className="flex flex-col justify-center items-center gap-5" onSubmit={handleSubmit(submitFn)}>
           <h3 className="font-bold text-[25px]">SIGN UP</h3>
           <div className="flex flex-col gap-2 justify-center items-center">            
@@ -180,7 +157,7 @@ export default function SignUpForm() {
                 </div> 
             )}          
           </div>
-          <button className={`w-[250px] h-[50px] bg-blue-400 rounded-xl text-white font-semibold text-[14px] my-7 ${!isValid || isSubmitting ? 'opacity-50 cursor-not-allowed' : 'opacity-100 cursor-pointer'}`} 
+          <button className={`w-[350px] h-[50px] bg-blue-400 rounded-xl text-white font-semibold text-[14px] my-7 ${!isValid || isSubmitting ? 'opacity-50 cursor-not-allowed' : 'opacity-100 cursor-pointer'}`} 
                   disabled={!isValid || isSubmitting }>{isSubmitting ? (
                       <div className="flex justify-center items-center gap-2">       
                         <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -188,7 +165,7 @@ export default function SignUpForm() {
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
                         <span>Processing...</span>
-                       </div>) : ("Submit")}
+                       </div>) : ("SUBMIT")}
             </button>
         </form>
       </div>
