@@ -3,6 +3,7 @@ import axios from "axios";
 import { loginUser, setUser } from "./clientActions";
 import { toast } from "react-toastify";
 import { redirect } from "react-router";
+import { setCategories } from "./productActions";
 
 export const fetchRoles = () => (dispatch) => {
     axios.get("https://workintech-fe-ecommerce.onrender.com/roles")
@@ -57,3 +58,14 @@ export const logUser = (user, history, redirectPath) => (dispatch) => {
         toast.error("Login failed. Please check your credentials.");
     });
 }
+
+export const getCategories = () => (dispatch) => {
+    axios.get("https://workintech-fe-ecommerce.onrender.com/categories")
+    .then((response) => {
+        dispatch(setCategories(response.data));
+        console.log("Categories fetched:", response.data);
+    })
+    .catch((error) => {
+        console.error("Error fetching categories:", error);
+    })
+};
