@@ -4,10 +4,40 @@ import { ListChecks } from "lucide-react"
 import ProductCardShop from "../components/ProductCardShop.jsx"
 import { Link } from "react-router-dom";
 import { FaPlay } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { getProduct } from "../store/actions/globalActions.js";
+import { setTotal } from "../store/actions/productActions.js";
 
 export default function Shop() {
+
+const dispatch = useDispatch();
+const productsObject = useSelector((state) => state.product.productList);
+const allProducts = productsObject.products;
+
+const [currentPage, setCurrentPage] = useState(1);
+const itemsPerPage = 12;
+
+const indexOfLastItem = currentPage * itemsPerPage;
+const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+const currentProducts = allProducts.slice(indexOfFirstItem, indexOfLastItem);
+
+const totalPage = Math.ceil(allProducts.length / itemsPerPage);
+
+const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo(0, 0);
+};
+
+useEffect(() => { 
+  dispatch(getProduct());
+  dispatch(setTotal(productsObject.total));
+  console.log("Fetched products:", productsObject);
+  console.log("Total products:", productsObject.total);
+}, []);
+
     return (
-            <div className="flex flex-col font-montserrat">
+            <div className="flex flex-col items-center font-montserrat">
                 <div className="flex flex-col text-[#252B42] bg-[#FAFAFA] pb-12">
                     <div className="flex flex-row h-[92px] justify-around items-center max-lg:h-[202px] max-lg:flex-col max-lg:justify-center max-lg:gap-15">
                         <h3 className="font-bold text-2xl">Shop</h3>
@@ -51,7 +81,7 @@ export default function Shop() {
                     </div>
                 </div>
                     <div className="flex flex-row h-[98px] justify-center gap-70 items-center max-lg:flex-col max-lg:h-[202px] max-lg:gap-10 max-lg:mt-10">
-                        <h6 className="font-bold text-[14px] leading-6 tracking-wide text-[#737373]">Showing all 12 results</h6>
+                        <h6 className="font-bold text-[14px] leading-6 tracking-wide text-[#737373]">Showing all {itemsPerPage} results</h6>
                         <div className="flex flex-row items-center gap-3">
                             <h6>Views: </h6>
                             <div className="w-[46px] h-[46px] border-1 border-[#ECECEC] rounded-lg flex justify-center items-center text-[#252B42] cursor-pointer hover:scale-110 transition-all duration-300"> <LayoutGrid size={20} className="inline-block" /></div>
@@ -73,30 +103,21 @@ export default function Shop() {
                         </div>
                     </div>
                 <div className="mt-15 flex flex-col h-[1778px] max-lg:h-[2750px] items-center gap-27">
-                    <div className="flex flex-row max-xl:flex-wrap max-lg:flex-col max-lg:gap-15 gap-5">
-                        <ProductCardShop />
-                        <ProductCardShop />
-                        <ProductCardShop />
-                        <ProductCardShop />
-                    </div>
-                    <div className="flex flex-row max-xl:flex-wrap max-lg:hidden gap-5">
-                        <ProductCardShop />
-                        <ProductCardShop />
-                        <ProductCardShop />
-                        <ProductCardShop />
-                    </div>
-                    <div className="flex flex-row max-xl:flex-wrap max-lg:hidden gap-5">
-                        <ProductCardShop />
-                        <ProductCardShop />
-                        <ProductCardShop />
-                        <ProductCardShop />
-                    </div>
+                    <div className="flex flex-row flex-wrap max-w-[1100px] max-lg:gap-15 gap-10 gap-y-20">
+                        {currentProducts?.map((currentProduct) => (<ProductCardShop products={currentProduct} />))}
+                    </div>                    
                     <div className="font-bold">
-                        <button className="border-1 border-gray-300 bg-[#F3F3F3] text-[#BDBDBD] p-3 py-5 rounded-bl-lg rounded-tl-lg">First</button>
-                        <button className="border-1 border-gray-300 p-3 py-5 text-[#23A6F0] focus:text-white focus:bg-[#23A6F0] hover:text-white hover:bg-[#23A6F0] cursor-pointer">1</button>
-                        <button className="border-1 border-gray-300 p-3 py-5 text-[#23A6F0] focus:text-white focus:bg-[#23A6F0] hover:text-white hover:bg-[#23A6F0] cursor-pointer">2</button>
-                        <button className="border-1 border-gray-300 p-3 py-5 text-[#23A6F0] focus:text-white focus:bg-[#23A6F0] hover:text-white hover:bg-[#23A6F0] cursor-pointer">3</button>
-                        <button className="border-1 border-gray-300 p-3 py-5 text-[#23A6F0] focus:text-white focus:bg-[#23A6F0] hover:text-white hover:bg-[#23A6F0] cursor-pointer rounded-br-lg rounded-tr-lg">Next</button>
+                        <button className="border-1 border-gray-300 text-[#23A6F0] p-3 py-5 rounded-bl-lg rounded-tl-lg cursor-pointer"
+                        onClick={() => handlePageChange(1)} disabled={currentPage === 1}>First</button>
+                        {Array.from({ length: totalPage }, (_, index) => index + 1).map((number) => (
+                            <button key={number} onClick={() => handlePageChange(number)}
+                            className={`border-1 border-gray-300 p-3 py-5 text-[#23A6F0] cursor-pointer 
+                            ${currentPage === number ? 'bg-[#23A6F0] text-white' : 'text-[#23A6F0] hover:text-white hover:bg-[#23A6F0]'}`}>
+                            {number}
+                        </button> 
+                        ))}                       
+                        <button onClick={() => handlePageChange(currentPage + 1)}
+                        className="border-1 border-gray-300 p-3 py-5 text-[#23A6F0] hover:text-white hover:bg-[#23A6F0] cursor-pointer rounded-br-lg rounded-tr-lg">Next</button>
                     </div>
                 </div>
                 <div className="h-[175px] bg-[#FAFAFA] flex flex-row justify-center items-center max-lg:h-[1173px] max-lg:flex-col max-lg:gap-17">

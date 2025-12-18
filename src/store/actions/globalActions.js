@@ -3,7 +3,7 @@ import axios from "axios";
 import { loginUser, setUser } from "./clientActions";
 import { toast } from "react-toastify";
 import { redirect } from "react-router";
-import { setCategories } from "./productActions";
+import { setCategories, setProductList } from "./productActions";
 
 export const fetchRoles = () => (dispatch) => {
     axios.get("https://workintech-fe-ecommerce.onrender.com/roles")
@@ -63,9 +63,18 @@ export const getCategories = () => (dispatch) => {
     axios.get("https://workintech-fe-ecommerce.onrender.com/categories")
     .then((response) => {
         dispatch(setCategories(response.data));
-        console.log("Categories fetched from API:", response.data);
     })
     .catch((error) => {
         console.error("Error fetching categories:", error);
+    })
+};
+
+export const getProduct = () => (dispatch) => {
+    axios.get("https://workintech-fe-ecommerce.onrender.com/products")
+    .then((response) => {
+        dispatch(setProductList(response.data));
+    })
+    .catch((error) => {
+        console.error("Error fetching products:", error);
     })
 };

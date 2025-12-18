@@ -10,7 +10,6 @@ import { ShoppingCart } from "lucide-react";
 import { Heart } from "lucide-react";
 import { BsChevronDown } from 'react-icons/bs';
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector, useDispatch } from "react-redux";
 import { LogOut } from "lucide-react";
 import { setUser } from "../store/actions/clientActions";
@@ -28,11 +27,9 @@ const categoriesMan = categories.filter(category => category.gender === 'e');
 const categoriesWoman = categories.filter(category => category.gender === 'k');
 
 useEffect(() => {
-  //console.log("Fetched categories in Header:", categories);
-  //console.log("Fetched categories code:", categories.code);
+  dispatch(getCategories());  
   console.log("Fetched man categories in Header:", categoriesMan);
   console.log("Fetched woman categories in Header:", categoriesWoman);
-  dispatch(getCategories());  
 }, []);
 
 const handleLogout = () => {
