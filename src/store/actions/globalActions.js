@@ -63,7 +63,7 @@ export const getCategories = () => (dispatch) => {
     axios.get("https://workintech-fe-ecommerce.onrender.com/categories")
     .then((response) => {
         dispatch(setCategories(response.data));
-        console.log("Categories fetched:", response.data);
+        console.log("Categories fetched from API:", response.data);
     })
     .catch((error) => {
         console.error("Error fetching categories:", error);

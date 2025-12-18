@@ -16,11 +16,24 @@ import { LogOut } from "lucide-react";
 import { setUser } from "../store/actions/clientActions";
 import { toast } from "react-toastify";
 import md5 from "md5";
+import { useEffect } from "react";
+import { getCategories } from "../store/actions/globalActions";
 
 export default function Header() {
 
 const userInfo = useSelector((state) => state.client.user);
 const dispatch = useDispatch();
+const categories = useSelector((state) => state.product.categories);
+const categoriesMan = categories.filter(category => category.gender === 'e');
+const categoriesWoman = categories.filter(category => category.gender === 'k');
+
+useEffect(() => {
+  //console.log("Fetched categories in Header:", categories);
+  //console.log("Fetched categories code:", categories.code);
+  console.log("Fetched man categories in Header:", categoriesMan);
+  console.log("Fetched woman categories in Header:", categoriesWoman);
+  dispatch(getCategories());  
+}, []);
 
 const handleLogout = () => {
     console.log("Logout is working");
@@ -61,20 +74,20 @@ const gravatarUrl = userInfo.email
                 <li className="mr-4"><Link to="/shop" className="font-bold text-[#737373] hover:text-black text-sm transition-all duration-300 justify-between items-center">Shop <BsChevronDown size={12} className="inline-block ml-1" /></Link></li>
                 <div className="scale-y-0 group-hover:scale-y-100 origin-top duration-300 absolute transition-all bg-white text-black p-4 flex flex-row gap-29">
                   <div className="flex flex-col">
-                    <a href="" className="mb-10 font-bold text-sm">Kadın</a>
-                    <a href="" className="font-bold text-gray-500 hover:text-black text-sm transition-all duration-300">Bags</a>
-                    <a href="" className="font-bold text-gray-500 mt-5 hover:text-black text-sm transition-all duration-300">Belts</a>
-                    <a href="" className="font-bold text-gray-500 mt-5 hover:text-black text-sm transition-all duration-300">Cosmetics</a>
-                    <a href="" className="font-bold text-gray-500 mt-5 hover:text-black text-sm transition-all duration-300">Bags</a>
-                    <a href="" className="font-bold text-gray-500 mt-5 hover:text-black text-sm transition-all duration-300">Hats</a>
+                    <a href="" className="font-bold text-sm">Kadın</a>
+                    {categoriesWoman?.map((category) => (
+                       <Link to={`/shop/kadin/${category.code.slice(2)}/${category.id}`} className="font-bold text-gray-500 mt-5 hover:text-black text-sm transition-all duration-300">
+                        {category.title}
+                      </Link>
+                    ))}
                   </div>
                   <div className="flex flex-col mr-27">
-                    <a href="" className="mb-10 font-bold text-sm">Erkek</a>
-                    <a href="" className="font-bold text-gray-500 hover:text-black text-sm transition-all duration-300">Bags</a>
-                    <a href="" className="font-bold text-gray-500 mt-5 hover:text-black text-sm transition-all duration-300">Belts</a>
-                    <a href="" className="font-bold text-gray-500 mt-5 hover:text-black text-sm transition-all duration-300">Cosmetics</a>
-                    <a href="" className="font-bold text-gray-500 mt-5 hover:text-black text-sm transition-all duration-300">Bags</a>
-                    <a href="" className="font-bold text-gray-500 mt-5 hover:text-black text-sm transition-all duration-300">Hats</a>
+                    <a href="" className="font-bold text-sm">Erkek</a>
+                    {categoriesMan?.map((category) => (
+                       <Link to={`/shop/erkek/${category.code.slice(2)}/${category.id}`} className="font-bold text-gray-500 mt-5 hover:text-black text-sm transition-all duration-300">
+                        {category.title}
+                      </Link>
+                    ))}
                   </div>
                 </div>
               </div>            
