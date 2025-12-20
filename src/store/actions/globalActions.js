@@ -3,7 +3,9 @@ import axios from "axios";
 import { loginUser, setUser } from "./clientActions";
 import { toast } from "react-toastify";
 import { redirect } from "react-router";
-import { setCategories, setProductList } from "./productActions";
+import { setCategories, setProductList, setFetchState } from "./productActions";
+
+let query = "";
 
 export const fetchRoles = () => (dispatch) => {
     axios.get("https://workintech-fe-ecommerce.onrender.com/roles")
@@ -69,12 +71,23 @@ export const getCategories = () => (dispatch) => {
     })
 };
 
-export const getProduct = () => (dispatch) => {
-    axios.get("https://workintech-fe-ecommerce.onrender.com/products")
+export const getProduct = (params) => (dispatch) => {
+
+    if(params){
+    const filteredParams = Object.fromEntries(
+        Object.entries(params).filter(([_, value]) => value !== null && value !== undefined && value !== "")
+    );
+    query = "?" + new URLSearchParams(filteredParams).toString();
+    console.log("Constructed Query:", query);
+}
+    
+    axios.get(`https://workintech-fe-ecommerce.onrender.com/products${query}`)
     .then((response) => {
         dispatch(setProductList(response.data));
+        dispatch(setFetchState("FETCHED"));
     })
     .catch((error) => {
         console.error("Error fetching products:", error);
+        dispatch(setFetchState("FAILED"));
     })
 };

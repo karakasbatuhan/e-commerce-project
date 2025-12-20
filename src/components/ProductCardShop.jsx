@@ -1,9 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 
 export default function ProductCard(data) {
-    console.log("BURAYA BAK:", data);
-    console.log("BURAYA BAK FOTO:", data.products.images);
-    console.log("BURAYA BAK FOTO:", data.products.images[0].url);
 
     return(        
         <div className="flex flex-col items-center font-montserrat gap-4 overflow-hidden">            

@@ -55,6 +55,9 @@ export default function App() {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>          
+          <Route path="/shop/:gender/:categoryName/:categoryId">
+            <Shop />
           </Route>
           <Route path="/shop">
             <Shop />
