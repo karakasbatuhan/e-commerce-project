@@ -20,6 +20,7 @@ const [sortOption, setSortOption] = useState("");
 const dispatch = useDispatch();
 const productsObject = useSelector((state) => state.product.productList);
 const allProducts = productsObject.products;
+const total = productsObject.total;
 const fetchState = useSelector((state) => state.product.fetchState);
 
 const [currentPage, setCurrentPage] = useState(1);
@@ -27,14 +28,24 @@ const itemsPerPage = 12;
 
 const indexOfLastItem = currentPage * itemsPerPage;
 const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-const currentProducts = allProducts?.slice(indexOfFirstItem, indexOfLastItem);
 
-const totalPage = Math.ceil(allProducts?.length / itemsPerPage);
+const totalPage = Math.ceil(total / itemsPerPage);
 
 const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     window.scrollTo(0, 0);
 };
+
+const getPageNumbers = () => {
+        const pages = [];
+        const startPage = Math.max(1, currentPage - 2);
+        const endPage = Math.min(totalPage, currentPage + 2);
+
+        for (let i = startPage; i <= endPage; i++) {
+            pages.push(i);
+        }
+        return pages;
+    };
 
 useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,22 +55,27 @@ useEffect(() => {
 },[filterText]);
 
 useEffect(() => {
-   const params = {
+    const offset = (currentPage - 1) * itemsPerPage;    
+    const params = {
     category: categoryId,
     filter: debouncedFilterText,
-    sort: sortOption
-}; 
+    sort: sortOption,
+    limit: itemsPerPage,
+    offset: offset}; 
 
     console.log("Current Params:", params);
     dispatch(getProduct(params));
-    setCurrentPage(1);
+}, [categoryId, debouncedFilterText, sortOption, currentPage, dispatch]);
 
-}, [categoryId, debouncedFilterText, sortOption, dispatch]);
+useEffect(() => {
+    setCurrentPage(1);
+}, [categoryId, debouncedFilterText, sortOption]);
 
 useEffect(() => { 
   dispatch(setTotal(productsObject.total));
   console.log("Fetched products:", productsObject);
-  console.log("Total products:", productsObject.total);
+  console.log("Total products:", total);
+  console.log("Total Page:", totalPage);
 }, []);
 
     return (
@@ -141,21 +157,27 @@ useEffect(() => {
                     {fetchState === "FETCHED" && (
                         <div className="mt-15 flex flex-col h-[1778px] max-[1076px]:h-[2350px] max-[1025px]:h-[4100px] max-[697px]:h-[7800px] items-center gap-27">
                             <div className="flex flex-row flex-wrap max-w-[1100px] max-lg:gap-15 gap-10 gap-y-20 max-xl:justify-center">
-                                {currentProducts?.map((currentProduct) => (<ProductCardShop products={currentProduct} />))}
-                            </div>                    
+                                {allProducts?.map((allProducts) => (
+                                    <ProductCardShop key={allProducts.id} products={allProducts} />
+                                ))}
+                            </div> 
+                            {totalPage > 1 && (                   
                             <div className="font-bold">
                                 <button className="border-1 border-gray-300 text-[#23A6F0] p-3 py-5 rounded-bl-lg rounded-tl-lg cursor-pointer"
-                                onClick={() => handlePageChange(1)} disabled={currentPage === 1}>First</button>
-                                {Array.from({ length: totalPage }, (_, index) => index + 1).map((number) => (
+                                onClick={() => handlePageChange(1)} disabled={currentPage === 1}>First</button>   
+                                                             
+                                {getPageNumbers().map((number) => (
                                     <button key={number} onClick={() => handlePageChange(number)}
                                     className={`border-1 border-gray-300 p-3 py-5 text-[#23A6F0] cursor-pointer 
                                     ${currentPage === number ? 'bg-[#23A6F0] text-white' : 'text-[#23A6F0] hover:text-white hover:bg-[#23A6F0]'}`}>
                                     {number}
                                 </button> 
-                                ))}                       
+                                ))}     
+                                                 
                                 <button onClick={() => handlePageChange(currentPage + 1)}
                                 className="border-1 border-gray-300 p-3 py-5 text-[#23A6F0] hover:text-white hover:bg-[#23A6F0] cursor-pointer rounded-br-lg rounded-tr-lg">Next</button>
                             </div>
+                            )}
                         </div>
                 )}
                 
