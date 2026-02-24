@@ -91,3 +91,17 @@ export const getProduct = (params) => (dispatch) => {
         dispatch(setFetchState("FAILED"));
     })
 };
+
+export const fetchProductDetails = (productId) => (dispatch) => {
+    dispatch({type: "SET_FETCHSTATE", payload: "FETCHING"});
+
+    axios.get(`https://workintech-fe-ecommerce.onrender.com/products/${productId}`)
+    .then((response) => {
+        dispatch({type: "SET_ACTIVE_PRODUCT", payload: response.data});
+        dispatch({type: "SET_FETCHSTATE", payload: "FETCHED"});
+    })
+    .catch((error) => {
+        console.error("Error fetching product details:", error);
+        dispatch({type: "SET_FETCHSTATE", payload: "FAILED"});
+    });
+};

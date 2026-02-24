@@ -52,10 +52,13 @@ export default function App() {
     <>
     <Header />
       <ScrollToTop />
-        <Switch>
+        <Switch>   
+          <Route path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId">
+           <ProductDetail />
+          </Route>  
           <Route exact path="/">
             <Home />
-          </Route>          
+          </Route>  
           <Route path="/shop/:gender/:categoryName/:categoryId">
             <Shop />
           </Route>

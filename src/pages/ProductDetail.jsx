@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {BsChevronRight, BsChevronLeft} from "react-icons/bs"
 import { FaStar } from "react-icons/fa";
 import ReactStars from "../components/ReactStars";
@@ -6,10 +6,39 @@ import { Heart} from "lucide-react";
 import { ShoppingCart } from "lucide-react";
 import { Eye } from "lucide-react";
 import ProductCardProductDetail from "../components/ProductCardProductDetail.jsx";
+import { slugify } from "../utils/slugify.js";
+import { useSelector } from "react-redux";
+import { fetchProductDetails } from "../store/actions/globalActions.js";
+import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 
 
 
 export default function ProductDetail() {
+
+    const {productId} = useParams();
+    const dispatch = useDispatch();
+    const activeProduct = useSelector((state) => state.product?.activeProduct || {});
+    const fetchState = useSelector((state) => state.product?.fetchState || "NOT_FETCHED");
+
+    const [mainImageIndex, setMainImageIndex] = useState(0);
+
+    useEffect(() => {
+        dispatch(fetchProductDetails(productId));
+        window.scrollTo(0, 0);
+    }, [dispatch, productId]);
+
+    if (fetchState === "FETCHING" || !activeProduct || !activeProduct.name) {
+        return (
+            <div className="w-full h-screen flex justify-center items-center">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+            </div>
+        );
+    }
+
+    const product = activeProduct;
+    const mainImageUrl = product.images?.[mainImageIndex]?.url || "https://via.placeholder.com/500";
+
   return (
     <div className="flex flex-col font-montserrat">
         <div className="h-[92px] flex flex-row bg-[#FAFAFA] max-lg:justify-center">
@@ -21,27 +50,33 @@ export default function ProductDetail() {
         </div>
         <div className="flex flex-row bg-[#FAFAFA] pb-10 max-lg:flex-col max-lg:items-center max-xl:gap-8">
             <div className="flex flex-col gap-5 max-xl:gap-8">
-                <div className="bg-[url(./assets/productdetail-1.jpg)] w-[506px] h-[450px] max-lg:w-[348px] max-lg:h-[277px] bg-cover bg-center flex flex-row justify-center items-center gap-90 ml-108 max-[1487px]:ml-50 max-lg:ml-0 max-lg:gap-50">
-                    <BsChevronLeft size={50} className="text-white cursor-pointer hover:scale-105 transition-all duration-300"/>
+                <div className="w-[506px] h-[450px] max-lg:w-[348px] max-lg:h-[277px] bg-cover bg-center flex flex-row justify-center items-center gap-90 ml-108 max-[1487px]:ml-50 max-lg:ml-0 max-lg:gap-50" style={{backgroundImage: `url(${mainImageUrl})`}}>
+                    {product.images?.length > 1 && (
+                     <>  
+                    <BsChevronLeft size={50} className="text-white cursor-pointer hover:scale-105 transition-all duration-300" onClick={() => setMainImageIndex((prev) => (prev > 0 ? prev - 1 : product.images.length - 1))}/>
                     <BsChevronRight size={50} className="text-white cursor-pointer hover:scale-105 transition-all duration-300"/>
+                    </>
+                    )}
                 </div>
                 <div className="flex flex-row ml-108 cursor-pointer gap-5 max-[1487px]:ml-50 max-lg:ml-0">
-                    <div className="bg-[url(./assets/productdetail-2.jpg)] w-[100px] h-[75px] bg-cover bg-center"></div>
-                    <div className="bg-[url(./assets/productdetail-1.jpg)] w-[100px] h-[75px] bg-cover bg-center opacity-50 hover:opacity-100 transition-all duration-200">
-                    </div>
+                    {product.images?.map((image, index) => (
+                        <div key={index} 
+                        style={{backgroundImage: `url(${image.url})`}} 
+                        className="bg-cover bg-center w-[100px] h-[75px] opacity-50 hover:opacity-100 transition-all duration-200" 
+                        onClick={() => setMainImageIndex(index)}></div>))}
                 </div>
             </div>
             <div className="flex flex-col gap-2 ml-10 mt-3 max-xl:ml-0 max-lg:w-[348px] max-lg:ml-15">
-                <h4 className="font-semibold text-[20px] text-[#252B42]">Floating Phone</h4>
+                <h4 className="font-semibold text-[20px] text-[#252B42]">{product.name}</h4>
                 <div>
                     <div className="flex flex-row items-center gap-2">
                         <ReactStars/>
-                        <h6 className="font-bold text-[14px] text-[#737373] mb-1.5">10 Reviews</h6>
+                        <h6 className="font-bold text-[14px] text-[#737373] mb-1.5">{product.sell_count || 0} Reviews</h6>
                     </div>                    
                 </div>
-                <h3 className="font-bold text-2xl text-[#252B42] mt-4">$1,139.33</h3>
-                <h6 className="text-[#737373] font-bold text-[14px]">Availability : <span className="text-[#23A6F0]">In Stock</span></h6>
-                <p className="max-w-[464px] font-semibold text-[14px] text-[#858585] mt-5 max-sm:w-[271px]">Met minim Mollie non desert Alamo est sit cliquey dolor <br className="max-lg:hidden" /> do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.</p>
+                <h3 className="font-bold text-2xl text-[#252B42] mt-4">${product.price?.toLocaleString()}</h3>
+                <h6 className="text-[#737373] font-bold text-[14px]">Availability : <span className="text-[#23A6F0]">{product.stock > 0 ? "In Stock" : "Out of Stock"}</span></h6>
+                <p className="max-w-[464px] font-semibold text-[14px] text-[#858585] mt-5 max-sm:w-[271px]">{product.description}</p>
                 <hr className="border-1 w-[465px] border-[#E6E6E6] mx-auto max-xl:w-[283px] mt-4"/>
                 <div className="flex flex-row gap-3 mt-4">
                     <button className="w-[30px] h-[30px] rounded-2xl bg-[#23A6F0] cursor-pointer hover:scale-105 transition-all duration-250"></button>
